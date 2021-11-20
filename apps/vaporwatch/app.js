@@ -53,7 +53,14 @@ let dragStart = null;
 
 Bangle.on('touch', (zone, e)  => {
   if (zone === 2) {
-    Bangle.setLCDBrightness(1);
+    const brightness = Bangle.getLCDBrightness();
+
+    if (brightness === 0) {
+      Bangle.setLCDBrightness(1);
+    } else {
+      Bangle.setLCDBrightness(0);
+      Bangle.setLocked(1);
+    }
   }
 });
 
