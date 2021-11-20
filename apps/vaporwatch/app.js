@@ -63,8 +63,11 @@ Bangle.on('drag', e => {
   if (b === 1 && !dragStart) {
     dragStart = e;
   } else if (b === 0 && dragStart) {
+    const sx = dragStart.x;
     const sy = dragStart.y;
+    const ex = e.x;
     const ey = e.y;
+    const dx = sx - ex;
     const dy = sy - ey;
 
     dragStart = null;
@@ -97,6 +100,6 @@ const tick = setInterval(drawTime, 1000);
 
 setWatch(() => {
   if (Bangle.isLCDOn()) {
-    Bangle.setLCDPower(false);
+    Bangle.setLCDBrightness(0);
   }
 }, BTN);
