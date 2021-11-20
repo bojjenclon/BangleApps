@@ -69,7 +69,7 @@ Bangle.on('drag', e => {
 
     dragStart = null;
 
-    if (sy < 118 && dy > 14) {
+    if (sy < 144 && dy > 14 && Math.abs(dx) < 20) {
       Bangle.showLauncher();
     }
   }
@@ -97,7 +97,7 @@ const tick = setInterval(drawTime, 1000);
 
 Bangle.setUI("clockupdown", btn => {
   if (btn < 0) {
-    // changeInfoMode();
+    Bangle.setLCDPower(false);
   }
 
   drawClock();
