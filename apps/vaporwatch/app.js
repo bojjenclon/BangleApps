@@ -73,6 +73,7 @@ Bangle.on('drag', e => {
     dragStart = null;
 
     if (sy < 144 && dy > 14 && Math.abs(dx) < 20) {
+      Bangle.setLCDBrightness(1);
       Bangle.showLauncher();
     }
   }
