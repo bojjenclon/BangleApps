@@ -46,9 +46,18 @@ Bangle.on('drag', e => {
     dragStart = null;
 
     if (sy < 80 && dy > 24) {
-      console.log('open');
+      changeInfoMode();
     }
   }
 });
 
 g.clear();
+
+Bangle.loadWidgets();
+Bangle.drawWidgets();
+
+Bangle.setUI("clockupdown", btn => {
+  if (btn < 0) {
+    changeInfoMode();
+  }
+});
