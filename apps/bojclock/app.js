@@ -46,7 +46,7 @@ Bangle.on('drag', e => {
     dragStart = null;
 
     if (sy < 80 && dy > 24) {
-      changeInfoMode();
+      Bangle.showLauncher();
     }
   }
 });
@@ -58,6 +58,6 @@ Bangle.drawWidgets();
 
 Bangle.setUI("clockupdown", btn => {
   if (btn < 0) {
-    changeInfoMode();
+    // changeInfoMode();
   }
 });
