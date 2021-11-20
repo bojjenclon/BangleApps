@@ -54,6 +54,7 @@ let dragStart = null;
 Bangle.on('touch', (zone, e)  => {
   if (zone === 2) {
     Bangle.setLCDBrightness(1);
+    Bangle.drawWidgets();
   }
 });
 
