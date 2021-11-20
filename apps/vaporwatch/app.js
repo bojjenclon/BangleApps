@@ -89,6 +89,7 @@ drawClock();
 Bangle.on('lcdPower', on => {
   if (on) {
     drawClock();
+    Bangle.drawWidgets();
   }
 });
 
