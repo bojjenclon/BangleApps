@@ -1,35 +1,13 @@
-const s = require('Storage');
-const apps = s
-  .list(/\.info$/)
-  .map(app => {
-    var a = s.readJSON(app, 1);
-    return a && 
-      {
-        name: a.name,
-        type: a.type,
-        icon: a.icon,
-        sortorder: a.sortorder,
-        src: a.src
-      };
-    })
-  .filter(app => app && (app.type === 'launch'));
+const locale = require("locale");
 
-apps.sort((a, b) => {
-  var n = (0 || a.sortorder) - (0 || b.sortorder);
-  if (n) {
-    return n; // do sortorder first
+function drawTime() {
+  if (!Bangle.isLCDOn()) {
+    return;
   }
-  if (a.name < b.name) {
-    return -1;
-  }
-  if (a.name > b.name) {
-    return 1;
-  }
-  return 0;
-});
 
-// console.log(apps);
-// console.log(Bangle.getOptions());
+  const now = new Date();
+  writeLine(locale.time(now, 1), 0);
+}
 
 let dragStart = null;
 
@@ -45,7 +23,7 @@ Bangle.on('drag', e => {
 
     dragStart = null;
 
-    if (sy < 80 && dy > 24) {
+    if (sy < 88 && dy > 14) {
       Bangle.showLauncher();
     }
   }
@@ -55,6 +33,16 @@ g.clear();
 
 Bangle.loadWidgets();
 Bangle.drawWidgets();
+
+drawTime();
+
+Bangle.on('lcdPower', on => {
+  if (on) {
+    drawTime();
+  }
+});
+
+const tick = setInterval(drawTime, 1000);
 
 Bangle.setUI("clockupdown", btn => {
   if (btn < 0) {
