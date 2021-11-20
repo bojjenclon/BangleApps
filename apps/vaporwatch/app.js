@@ -51,6 +51,12 @@ function drawClock() {
 
 let dragStart = null;
 
+Bangle.on('touch', (zone, e)  => {
+  if (zone === 2) {
+    Bangle.setLCDBrightness(1);
+  }
+});
+
 Bangle.on('drag', e => {
   const b = e.b;
 
@@ -63,10 +69,14 @@ Bangle.on('drag', e => {
 
     dragStart = null;
 
-    if (sy < 88 && dy > 14) {
+    if (sy < 118 && dy > 14) {
       Bangle.showLauncher();
     }
   }
+});
+
+Bangle.setOptions({
+  wakeOnTouch: true,
 });
 
 g.clear();
