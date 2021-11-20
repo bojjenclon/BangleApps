@@ -102,4 +102,6 @@ setWatch(() => {
   if (Bangle.isLCDOn()) {
     Bangle.setLCDBrightness(0);
   }
-}, BTN);
+}, BTN, {
+  repeat: true,
+});
