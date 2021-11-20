@@ -95,10 +95,8 @@ Bangle.on('lcdPower', on => {
 
 const tick = setInterval(drawTime, 1000);
 
-Bangle.setUI("clockupdown", btn => {
-  if (btn < 0) {
+setWatch(() => {
+  if (Bangle.isLCDOn()) {
     Bangle.setLCDPower(false);
   }
-
-  drawClock();
-});
+}, BTN);
