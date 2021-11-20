@@ -4325,7 +4325,7 @@
   },
   { "id": "timetoduel",
     "name": "Time to Duel",
-    "shortName":"Time to Duel",
+    "shortName":"DuelTime",
     "icon": "app.png",
     "version":"0.01",
     "supports": ["BANGLEJS2"],
