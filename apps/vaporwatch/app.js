@@ -49,12 +49,27 @@ function drawClock() {
   drawTime();
 }
 
+let didTouch = false;
+let touchTimeout;
 let dragStart = null;
 
-Bangle.on('touch', (zone, e)  => {
+Bangle.on('touch', (zone, e) => {
   if (zone === 2) {
-    Bangle.setLCDBrightness(1);
-    Bangle.drawWidgets();
+    if (didTouch) {
+      console.log(1);
+      Bangle.setLCDBrightness(1);
+      Bangle.drawWidgets();
+    }
+
+    didTouch = true;
+
+    if (touchTimeout) {
+      clearTimeout(touchTimeout);
+    }
+
+    touchTimeout = setTimeout(() => {
+      didTouch = false;
+    }, 250);
   }
 });
 
