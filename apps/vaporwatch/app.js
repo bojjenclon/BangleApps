@@ -46,6 +46,8 @@ function drawClock() {
     return;
   }
 
+  g.reset();
+
   drawBackground();
   drawTime();
 }
@@ -57,7 +59,6 @@ let dragStart = null;
 Bangle.on('touch', (zone, e) => {
   if (zone === 2) {
     if (didTouch) {
-      console.log(1);
       Bangle.setLCDBrightness(1);
       Bangle.drawWidgets();
     }
