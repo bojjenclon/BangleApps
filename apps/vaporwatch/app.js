@@ -30,13 +30,14 @@ function drawTime() {
 
   const time = `${clockHours}:${clockMinutes}`;
 
-  const x = 44;
+  const x = 46;
   const y = 34;
+  const fontSize = 32;
 
-  g.setFont('6x8', 3);
+  g.setFont('Vector', fontSize);
   g.setColor(textColor);
   g.setBgColor('#000');
-  g.clearRect(x, y, x + ((time.length + 1) * 18), y + 24);
+  g.clearRect(x, y, x + ((time.length + 2) * fontSize) - fontSize, y + fontSize);
   g.drawString(time, x, y);
 }
 
