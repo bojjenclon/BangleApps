@@ -34,6 +34,8 @@ function drawTime() {
   const y = 34;
   const fontSize = 32;
 
+  g.reset();
+
   g.setFont('Vector', fontSize);
   g.setColor(textColor);
   g.setBgColor('#000');
@@ -101,7 +103,7 @@ Bangle.setOptions({
   wakeOnTouch: true,
 });
 
-g.clear();
+g.reset().clear();
 
 Bangle.loadWidgets();
 Bangle.drawWidgets();
