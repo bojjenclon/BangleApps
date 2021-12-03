@@ -33,22 +33,19 @@ function drawBackground() {
 
 function drawTime() {
   const now = new Date();
-  const hours = now.getHours();
-  const clockHours = ('0' + ((is12Hour && hours > 12) ? hours - 12 : hours)).substr(-2);
-  const clockMinutes = ('0' + now.getMinutes()).substr(-2);
+  const time = locale.time(now, 1);
 
-  const time = `${clockHours}:${clockMinutes}`;
-
-  const x = 46;
-  const y = widgetHeight + 10;
+  const x = Math.round(g.getWidth() / 2) + 2;
+  const y = widgetHeight + 46;
   const fontSize = 32;
 
   g.reset();
 
   g.setFont('Vector', fontSize);
+  g.setFontAlign(0, 1);
   g.setColor(textColor);
   g.setBgColor('#000');
-  g.clearRect(x, y, x + ((time.length + 2) * fontSize) - fontSize, y + fontSize);
+  g.clearRect(x, y, x + ((time.length + 2) * fontSize) - fontSize, y - fontSize);
   g.drawString(time, x, y);
 }
 
