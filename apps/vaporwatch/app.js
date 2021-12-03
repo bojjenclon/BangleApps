@@ -56,13 +56,12 @@ function drawClock() {
 
 let didTouch = false;
 let touchTimeout;
-let dragStart = null;
+// let dragStart = null;
 
 Bangle.on('touch', (zone, e) => {
   if (zone === 2) {
     if (didTouch) {
       Bangle.setLCDBrightness(1);
-      Bangle.drawWidgets();
     }
 
     didTouch = true;
@@ -77,30 +76,30 @@ Bangle.on('touch', (zone, e) => {
   }
 });
 
-Bangle.on('drag', e => {
-  const b = e.b;
+// Bangle.on('drag', e => {
+//   const b = e.b;
 
-  if (b === 1 && !dragStart) {
-    dragStart = e;
-  } else if (b === 0 && dragStart) {
-    const sx = dragStart.x;
-    const sy = dragStart.y;
-    const ex = e.x;
-    const ey = e.y;
-    const dx = sx - ex;
-    const dy = sy - ey;
+//   if (b === 1 && !dragStart) {
+//     dragStart = e;
+//   } else if (b === 0 && dragStart) {
+//     const sx = dragStart.x;
+//     const sy = dragStart.y;
+//     const ex = e.x;
+//     const ey = e.y;
+//     const dx = sx - ex;
+//     const dy = sy - ey;
 
-    dragStart = null;
+//     dragStart = null;
 
-    if (sy < 144 && dy > 14 && Math.abs(dx) < 20) {
-      Bangle.setLCDBrightness(1);
-      Bangle.showLauncher();
-    }
-  }
-});
+//     if (sy < 144 && dy > 14 && Math.abs(dx) < 20) {
+//       Bangle.setLCDBrightness(1);
+//       Bangle.showLauncher();
+//     }
+//   }
+// });
 
 Bangle.setOptions({
-  wakeOnTouch: true,
+  // wakeOnTouch: true,
 });
 
 g.reset().clear();
@@ -112,8 +111,9 @@ drawClock();
 
 Bangle.on('lcdPower', on => {
   if (on) {
-    drawClock();
     Bangle.drawWidgets();
+
+    drawClock();
   }
 });
 
@@ -122,6 +122,7 @@ const tick = setInterval(drawTime, 1000);
 setWatch(() => {
   if (Bangle.isLCDOn()) {
     Bangle.setLCDBrightness(0);
+    Bangle.setLock(1);
   }
 }, BTN, {
   repeat: true,
