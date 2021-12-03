@@ -56,12 +56,13 @@ function drawClock() {
   drawBackground();
   drawTime();
 
+  Bangle.drawWidgets();
+
   calcNextTick();
 }
 
 let didTouch = false;
 let touchTimeout;
-// let dragStart = null;
 
 Bangle.on('touch', (zone, e) => {
   if (!Bangle.isLCDOn()) {
@@ -85,31 +86,6 @@ Bangle.on('touch', (zone, e) => {
   }
 });
 
-// Bangle.on('drag', e => {
-//   const b = e.b;
-
-//   if (b === 1 && !dragStart) {
-//     dragStart = e;
-//   } else if (b === 0 && dragStart) {
-//     const sx = dragStart.x;
-//     const sy = dragStart.y;
-//     const ex = e.x;
-//     const ey = e.y;
-//     const dx = sx - ex;
-//     const dy = sy - ey;
-
-//     dragStart = null;
-
-//     if (sy < 144 && dy > 14 && Math.abs(dx) < 20) {
-//       Bangle.setLCDBrightness(1);
-//       Bangle.showLauncher();
-//     }
-//   }
-// });
-
-// Bangle.setOptions({
-//   wakeOnTouch: true,
-// });
 
 g.reset().clear();
 
@@ -130,12 +106,3 @@ Bangle.on('lcdPower', on => {
 });
 
 Bangle.setUI('clock');
-
-// setWatch(() => {
-//   if (Bangle.isLCDOn()) {
-//     Bangle.setLCDBrightness(0);
-//     Bangle.setLock(1);
-//   }
-// }, BTN, {
-//   repeat: true,
-// });
