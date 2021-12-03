@@ -20,7 +20,7 @@ function calcNextTick() {
   }
 
   tick = setTimeout(() => {
-    delete tick;
+    tick = undefined;
     drawClock();
   }, secondsLeft);
 }
@@ -124,7 +124,7 @@ Bangle.on('lcdPower', on => {
   } else {
     if (tick) {
       clearTimeout(tick);
-      delete tick;
+      tick = undefined;
     }
   }
 });
