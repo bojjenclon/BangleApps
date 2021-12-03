@@ -10,19 +10,26 @@ const bg = {
 
 const textColor = g.theme.dark ? '#a0a' : '#080';
 
-function drawBackground() {
-  if (!Bangle.isLCDOn()) {
-    return;
+let tick;
+
+function calcNextTick() {
+  const secondsLeft = 60000 - (Date.now() % 60000);
+
+  if (tick) {
+    clearTimeout(tick);
   }
 
+  tick = setTimeout(() => {
+    delete tick;
+    drawClock();
+  }, secondsLeft);
+}
+
+function drawBackground() {
   g.drawImage(bg, 0, g.getHeight() - bg.height);
 }
 
 function drawTime() {
-  if (!Bangle.isLCDOn()) {
-    return;
-  }
-
   const now = new Date();
   const hours = now.getHours();
   const clockHours = ('0' + ((is12Hour && hours > 12) ? hours - 12 : hours)).substr(-2);
@@ -44,14 +51,12 @@ function drawTime() {
 }
 
 function drawClock() {
-  if (!Bangle.isLCDOn()) {
-    return;
-  }
-
   g.reset();
 
   drawBackground();
   drawTime();
+
+  calcNextTick();
 }
 
 let didTouch = false;
@@ -59,6 +64,10 @@ let touchTimeout;
 // let dragStart = null;
 
 Bangle.on('touch', (zone, e) => {
+  if (!Bangle.isLCDOn()) {
+    return;
+  }
+
   if (zone === 2) {
     if (didTouch) {
       Bangle.setLCDBrightness(1);
@@ -98,9 +107,9 @@ Bangle.on('touch', (zone, e) => {
 //   }
 // });
 
-Bangle.setOptions({
-  // wakeOnTouch: true,
-});
+// Bangle.setOptions({
+//   wakeOnTouch: true,
+// });
 
 g.reset().clear();
 
@@ -111,19 +120,22 @@ drawClock();
 
 Bangle.on('lcdPower', on => {
   if (on) {
-    Bangle.drawWidgets();
-
     drawClock();
+  } else {
+    if (tick) {
+      clearTimeout(tick);
+      delete tick;
+    }
   }
 });
 
-const tick = setInterval(drawTime, 1000);
+Bangle.setUI('clock');
 
-setWatch(() => {
-  if (Bangle.isLCDOn()) {
-    Bangle.setLCDBrightness(0);
-    Bangle.setLock(1);
-  }
-}, BTN, {
-  repeat: true,
-});
+// setWatch(() => {
+//   if (Bangle.isLCDOn()) {
+//     Bangle.setLCDBrightness(0);
+//     Bangle.setLock(1);
+//   }
+// }, BTN, {
+//   repeat: true,
+// });
