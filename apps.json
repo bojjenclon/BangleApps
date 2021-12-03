@@ -7763,7 +7763,7 @@
   {
     "id": "menusmall",
     "name": "Small Menus",
-    "version": "0.02",
+    "version": "0.0.3",
     "description": "Replace Bangle.js 2's menus with a version that contains smaller text",
     "icon": "app.png",
     "type": "boot",
