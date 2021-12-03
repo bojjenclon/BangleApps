@@ -10,7 +10,7 @@ E.showMenu = function(items) {
   var options = items[""];
   if (options) menuItems.splice(menuItems.indexOf(""),1);
   if (!(options instanceof Object)) options = {};
-  options.fontHeight = options.fontHeight|14;
+  options.fontHeight = options.fontHeight|16;
   if (options.selected === undefined)
     options.selected = 0;
   var ar = Bangle.appRect;
