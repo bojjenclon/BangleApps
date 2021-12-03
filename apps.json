@@ -7763,7 +7763,7 @@
   {
     "id": "menusmall",
     "name": "Small Menus",
-    "version": "0.0.3",
+    "version": "0.03",
     "description": "Replace Bangle.js 2's menus with a version that contains smaller text",
     "icon": "app.png",
     "type": "boot",
@@ -8184,7 +8184,7 @@
     "name": "VaporWatch",
     "shortName": "VaporWatch",
     "icon": "app.png",
-    "version": "0.04",
+    "version": "0.05",
     "supports": [
       "BANGLEJS2"
     ],
